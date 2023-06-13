@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.TimePicker
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.NoMatchingViewException
 import androidx.test.espresso.ViewInteraction
@@ -127,7 +128,7 @@ object TestHelper {
             )
         )
         recyclerView.perform(
-            RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(
+            RecyclerViewActions.actionOnItemAtPosition<ViewHolder>(
                 0,
                 click()
             )
@@ -282,7 +283,7 @@ object TestHelper {
         return onView(
             withId(matcher)
         ).perform(
-            RecyclerViewActions.scrollTo<RecyclerView.ViewHolder>(
+            RecyclerViewActions.scrollTo<ViewHolder>(
                 hasDescendant(
                     withText(text)
                 )
@@ -294,16 +295,17 @@ object TestHelper {
 
 
     fun scrollToClaimWithTitleAndOpenIt(matcher: Int, text: String): ViewInteraction? {
-        return onView(
+        return  onView(
             withId(matcher)
         ).perform(
-            RecyclerViewActions.scrollTo<RecyclerView.ViewHolder>(
+            RecyclerViewActions.actionOnItem<ViewHolder>(
                 hasDescendant(
                     withText(text)
-                )
+                ), click()
             )
 
-        ).perform(click())
+        )
+
     }
 
     fun checkMessageIsDisplayed(matcher: Int, text: String) {
@@ -341,7 +343,7 @@ object TestHelper {
         return onView(
             withId(matcher)
         ).perform(
-            RecyclerViewActions.scrollTo<RecyclerView.ViewHolder>(
+            RecyclerViewActions.scrollTo<ViewHolder>(
                 hasDescendant(
                     withText(text)
                 )

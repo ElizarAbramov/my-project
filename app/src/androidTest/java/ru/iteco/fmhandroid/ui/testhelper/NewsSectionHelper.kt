@@ -82,6 +82,8 @@ object NewsSectionHelper {
 
         clickButton(R.id.save_button)
 
+        Thread.sleep(1500)
+
         scrollToNewsWithTitle(
             R.id.news_list_recycler_view,
             title

@@ -59,6 +59,8 @@ object ClaimsSectionHelper {
 
         clickButton(R.id.save_button)
 
+        Thread.sleep(1500)
+
         scrollToClaimWithTitle(R.id.claim_list_recycler_view, title)?.check(matches(isDisplayed()))
     }
 
@@ -172,6 +174,8 @@ object ClaimsSectionHelper {
 
         clickButton(R.id.save_button)
 
+        Thread.sleep(1000)
+
         scrollToClaimWithTitleAndOpenIt(R.id.claim_list_recycler_view, title)
 
         checkText(R.id.title_text_view, title)
@@ -201,11 +205,13 @@ object ClaimsSectionHelper {
 
         clickButton(R.id.save_button)
 
+        Thread.sleep(1500)
+
         scrollToClaimWithTitleAndOpenIt(R.id.claim_list_recycler_view, title)
 
         clickButton(R.id.add_comment_image_button)
 
-        Thread.sleep(1000)
+        Thread.sleep(5000)
 
         replaceClaimCommentTextAndCloseKeyboard(R.id.comment_text_input_layout,"Пробный комментарий")
 
