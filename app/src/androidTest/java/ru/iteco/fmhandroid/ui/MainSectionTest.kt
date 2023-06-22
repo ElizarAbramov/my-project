@@ -1,41 +1,35 @@
 package ru.iteco.fmhandroid.ui
 
-import androidx.test.ext.junit.rules.ActivityScenarioRule
+import BaseClass
 import androidx.test.filters.LargeTest
 import io.qameta.allure.android.runners.AllureAndroidJUnit4
 import io.qameta.allure.kotlin.Allure
 import io.qameta.allure.kotlin.Description
 import io.qameta.allure.kotlin.junit4.DisplayName
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import ru.iteco.fmhandroid.ui.testhelper.AuthorizationHelper.trueLogTruePass
 import ru.iteco.fmhandroid.ui.testhelper.MainSectionHelper.clickNewsCard
 import ru.iteco.fmhandroid.ui.testhelper.MainSectionHelper.clickOnAllClaimsButton
 import ru.iteco.fmhandroid.ui.testhelper.MainSectionHelper.clickOnAllNewsButton
 import ru.iteco.fmhandroid.ui.testhelper.MainSectionHelper.clickOnHidingNewsButton
 import ru.iteco.fmhandroid.ui.testhelper.TestHelper.checkIfLogin
+import ru.iteco.fmhandroid.ui.testhelper.TestHelper.successfulAuthorization
 
 
 @LargeTest
 @RunWith(AllureAndroidJUnit4::class)
 
-class MainSectionTest {
+class MainSectionTest : BaseClass() {
 
     @Before
 
     fun loginIfNotLogged() {
 
         if (!checkIfLogin()) {
-            trueLogTruePass()
+            successfulAuthorization()
         }
     }
-
-    @Rule
-    @JvmField
-
-    var mActivityScenarioRule = ActivityScenarioRule(AppActivity::class.java)
 
 
     @Test
@@ -45,6 +39,7 @@ class MainSectionTest {
 
         clickOnHidingNewsButton()
         Allure.step("Блок новостей на главном экране успешно скрыт")
+
     }
 
     @Test
@@ -54,6 +49,7 @@ class MainSectionTest {
 
         clickOnAllNewsButton()
         Allure.step("Переход в блок новостей произведен успешно")
+
     }
 
     @Test
@@ -63,6 +59,7 @@ class MainSectionTest {
 
         clickNewsCard()
         Allure.step("Описание новости просматривается")
+
     }
 
 
@@ -73,5 +70,6 @@ class MainSectionTest {
 
         clickOnAllClaimsButton()
         Allure.step("Переход в блок с претензиями осуществлен успешно")
+
     }
 }

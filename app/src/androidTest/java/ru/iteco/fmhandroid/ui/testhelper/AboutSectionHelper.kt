@@ -2,6 +2,7 @@ package ru.iteco.fmhandroid.ui.testhelper;
 
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withText
+import io.qameta.allure.kotlin.Allure
 import ru.iteco.fmhandroid.R
 import ru.iteco.fmhandroid.ui.testhelper.TestHelper.clickButton
 import ru.iteco.fmhandroid.ui.testhelper.TestHelper.clickButtonWithText
@@ -13,6 +14,8 @@ object AboutSectionHelper {
     fun aboutTest() {
 
         Thread.sleep(5000)
+
+        Allure.step("Переход в раздел О приложении")
 
         clickButton(R.id.main_menu_image_button)
 

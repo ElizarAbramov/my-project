@@ -16,6 +16,7 @@ import androidx.test.espresso.contrib.PickerActions
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.RootMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
+import io.qameta.allure.kotlin.Allure
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.*
@@ -26,6 +27,8 @@ import ru.iteco.fmhandroid.R
 object TestHelper {
 
     fun logout() {
+
+        Allure.step("Осуществление логаута")
 
         Thread.sleep(5000)
 
@@ -39,10 +42,13 @@ object TestHelper {
         materialTextView.perform(click())
 
         authorizationText.check(matches(isDisplayed()))
+
     }
 
 
     fun chooseTime(matcher: Int, hours: Int, minutes: Int) {
+
+        Allure.step("Выбор времени")
 
         val selectionTime = onView(
             allOf(
@@ -61,6 +67,8 @@ object TestHelper {
     }
 
     fun chooseDate(matcher: Int, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+
+        Allure.step("Выбор даты")
 
         onView(
             allOf(
@@ -118,6 +126,9 @@ object TestHelper {
     )
 
     fun clickOnNewsItemCard() {
+
+        Allure.step("Нажатие на карточку новости")
+
         val recyclerView = onView(
             allOf(
                 withId(R.id.news_list_recycler_view),
@@ -136,12 +147,18 @@ object TestHelper {
     }
 
     fun clickButtonWithChildAtPosition(matcher: ViewInteraction) {
+
+        Allure.step("Нажатие на кнопку с указанием ChildAtPosition")
+
         matcher.perform(click())
+
     }
 
     //    Authorization
 
     fun checkIfLogin(): Boolean {
+
+        Allure.step("Проверка на наличие авторизации")
 
         Thread.sleep(5000)
 
@@ -158,6 +175,8 @@ object TestHelper {
 
     fun unsuccessfulAuthorization(login: String, password: String) {
 
+        Allure.step("Неудачная авторизация")
+
         Thread.sleep(5000)
 
         replaceTextAndCloseKeyboard(R.id.login_text_input_edit_text, login)
@@ -171,9 +190,15 @@ object TestHelper {
         authorizationScreenText.check(matches(isDisplayed()))
     }
 
-    fun successfulAuthorization(login: String, password: String) {
+    fun successfulAuthorization() {
 
         Thread.sleep(5000)
+
+        Allure.step("Удачная авторизация")
+
+        val login = "login2"
+
+        val password = "password2"
 
         replaceTextAndCloseKeyboard(R.id.login_text_input_edit_text, login)
 
@@ -187,6 +212,9 @@ object TestHelper {
     }
 
     fun replaceTextAndCloseKeyboard(matcher: Int, text: String) {
+
+        Allure.step("Замена текста с последующим закртием клавиатуры")
+
         onView(
             allOf(
                 withId(matcher), isDisplayed()
@@ -196,6 +224,8 @@ object TestHelper {
     }
 
     fun clickButton(matcher: Int) {
+
+        Allure.step("Нажатие на кнопку")
 
         onView(
 
@@ -221,6 +251,9 @@ object TestHelper {
     //Claims
 
     fun clickButtonWithText(matcher: Int, text: String) {
+
+        Allure.step("Нажатие на кнопку с текстом")
+
         val claimsButton = onView(
             allOf(
                 withId(matcher), withText(text),
@@ -233,6 +266,9 @@ object TestHelper {
     }
 
     fun replaceClaimCommentTextAndCloseKeyboard(matcher: Int, text: String) {
+
+        Allure.step("Замена текста в поле комментария претензии и последующее закрытие клавиатуры")
+
         onView(
             allOf(
                 isDescendantOfA(withId(matcher)),
@@ -244,6 +280,9 @@ object TestHelper {
     }
 
     fun checkText(matcher: Int, text: String) {
+
+        Allure.step("Проверка текста в сообщении")
+
         val errorMessage = onView(
             allOf(
                 withId(matcher), withText(text),
@@ -262,6 +301,9 @@ object TestHelper {
 
 
     fun selectingChiefExecutor() {
+
+        Allure.step("Выбор главного исполнителя")
+
         val executorField = onView(
             allOf(
                 withId(R.id.executor_drop_menu_auto_complete_text_view),
@@ -280,6 +322,9 @@ object TestHelper {
     }
 
     fun scrollToClaimWithTitle(matcher: Int, text: String): ViewInteraction? {
+
+        Allure.step("Прокручивание до претензии с заголовком")
+
         return onView(
             withId(matcher)
         ).perform(
@@ -293,9 +338,9 @@ object TestHelper {
 
     }
 
-
     fun scrollToClaimWithTitleAndOpenIt(matcher: Int, text: String): ViewInteraction? {
-        return  onView(
+
+        return onView(
             withId(matcher)
         ).perform(
             RecyclerViewActions.actionOnItem<ViewHolder>(
@@ -309,6 +354,9 @@ object TestHelper {
     }
 
     fun checkMessageIsDisplayed(matcher: Int, text: String) {
+
+        Allure.step("Проверка отображения сообщения")
+
         val errorMessage = onView(
             allOf(
                 withId(matcher), withText(text),
@@ -333,6 +381,9 @@ object TestHelper {
     )
 
     fun selectNewsCategory(text: String) {
+
+        Allure.step("Выбор новостной категории")
+
         onView(withText(text))
             .inRoot(RootMatchers.isPlatformPopup())
             .perform(click())
@@ -340,6 +391,9 @@ object TestHelper {
     }
 
     fun scrollToNewsWithTitle(matcher: Int, text: String): ViewInteraction? {
+
+        Allure.step("Прокрутка до новости с заголовком")
+
         return onView(
             withId(matcher)
         ).perform(

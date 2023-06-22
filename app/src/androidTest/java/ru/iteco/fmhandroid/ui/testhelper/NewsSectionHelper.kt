@@ -2,6 +2,7 @@ package ru.iteco.fmhandroid.ui.testhelper
 
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
+import io.qameta.allure.kotlin.Allure
 import ru.iteco.fmhandroid.ui.testhelper.TestHelper.clickButton
 import ru.iteco.fmhandroid.ui.testhelper.TestHelper.clickButtonWithText
 import ru.iteco.fmhandroid.ui.testhelper.TestHelper.newsScreenText
@@ -18,6 +19,9 @@ import java.time.LocalTime
 object NewsSectionHelper {
 
     fun switchToNewsSection() {
+
+        Allure.step("Переход в секцию новостей")
+
         Thread.sleep(4000)
 
         clickButton(R.id.main_menu_image_button)
@@ -25,9 +29,12 @@ object NewsSectionHelper {
         clickButtonWithText(android.R.id.title, "News")
 
         newsScreenText.check(matches(isDisplayed()))
+
     }
 
     fun controlPanel() {
+
+        Allure.step("Переход в панель управления новостями")
 
         Thread.sleep(4000)
 
@@ -38,6 +45,7 @@ object NewsSectionHelper {
         clickButton(R.id.edit_news_material_button)
 
         controlPanelText.check(matches(isDisplayed()))
+
     }
 
     fun createNews(
@@ -50,6 +58,9 @@ object NewsSectionHelper {
         minutes: Int,
         description: String
     ) {
+
+        Allure.step("Создание новости")
+
         val title = titleText + LocalTime.now()
 
         Thread.sleep(4000)
